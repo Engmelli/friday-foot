@@ -15,10 +15,7 @@ body {
 }
 
 .player {
-    width: 100px; /* Increased width */
-    height: 50px; /* Increased height */
     padding: 10px;
-    margin: 5px;
     margin: 5px;
     background-color: #f0f0f0;
     cursor: pointer;
@@ -59,31 +56,8 @@ body {
 }
 
 .player.selected {
-    background-color: #cfe3ff; /* Light blue background for selected player */
-    border: 2px solid #2a7fff; /* Darker blue border for selected player */
-    color: #000; /* Optional: Change text color if needed */
+    background-color: #cfe3ff; 
+    border: 2px solid #2a7fff; 
+    color: #000; 
 }
 
-#addPlayerForm {
-    margin-bottom: 20px;
-}
-
-#addPlayerForm input {
-    margin-right: 10px;
-    padding: 5px;
-}
-
-#addPlayerForm button {
-    padding: 5px 10px;
-}
-
-.player {
-    display: flex;
-    align-items: center;
-    margin-bottom: 5px;
-}
-
-.player button {
-    margin-left: 10px;
-    cursor: pointer;
-}

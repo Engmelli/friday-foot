@@ -2,7 +2,6 @@ const playerNames = ["أحمد", "منذر", "كوريا", "تركي", "ملي",
 const playersDiv = document.getElementById('players');
 let selectedPlayer = null;
 
-// Create clickable player elements
 playerNames.forEach(name => {
     const div = document.createElement('div');
     div.textContent = name;
@@ -17,13 +16,12 @@ dropZones.forEach(zone => {
 });
 
 function selectPlayer(e) {
-    // Deselect previously selected player if any
     if (selectedPlayer) {
         selectedPlayer.classList.remove('selected');
     }
 
     selectedPlayer = e.target;
-    selectedPlayer.classList.add('selected'); // Highlight the selected player
+    selectedPlayer.classList.add('selected'); 
 }
 
 function placePlayer(e) {
@@ -36,4 +34,3 @@ function placePlayer(e) {
     }
 }
 
-// Optional: Add styles for .selected in your CSS to highlight the selected player
