@@ -15,7 +15,10 @@ body {
 }
 
 .player {
+    width: 100px; /* Increased width */
+    height: 50px; /* Increased height */
     padding: 10px;
+    margin: 5px;
     margin: 5px;
     background-color: #f0f0f0;
     cursor: pointer;
