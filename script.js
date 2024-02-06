@@ -1,73 +1,39 @@
-const playerNames = [
-    "أحمد",
-    "منذر",
-    "كوريا",
-    "تركي",
-    "ملي",
-    "براء",
-    "رجب",
-    "براء احمدي",
-    "محمد",
-    "باخريبة",
-    "زياد بيما",
-    "زياد",
-    "هياف",
-    "بالبيد",
-    "منشي",
-    "باشماخ",
-    "عبديه",
-    "سعود",
-    "ولي",
-    "غسان"
-];
+const playerNames = ["أحمد", "منذر", "كوريا", "تركي", "ملي", "براء", "رجب", "براء 2", "محمد", "باخريبة", "زياد 1", "زياد 2", "هياف", "بالبيد", "منشي", "باشماخ", "عبديه", "سعود", "ولي", "غسان"];
 const playersDiv = document.getElementById('players');
-let draggedElement = null;
+let selectedPlayer = null;
 
+// Create clickable player elements
 playerNames.forEach(name => {
     const div = document.createElement('div');
     div.textContent = name;
     div.classList.add('player');
-    div.setAttribute('draggable', true);
-    div.setAttribute('id', name.replace(/\s+/g, '-').toLowerCase());
-    div.addEventListener('dragstart', handleDragStart);
+    div.addEventListener('click', selectPlayer);
     playersDiv.appendChild(div);
 });
 
 const dropZones = document.querySelectorAll('.drop-zone');
 dropZones.forEach(zone => {
-    zone.addEventListener('dragover', handleDragOver);
-    zone.addEventListener('dragleave', handleDragLeave);
-    zone.addEventListener('drop', handleDrop);
+    zone.addEventListener('click', placePlayer);
 });
 
-function handleDragStart(e) {
-    draggedElement = e.target;
-    e.dataTransfer.setData('text/plain', draggedElement.id);
+function selectPlayer(e) {
+    // Deselect previously selected player if any
+    if (selectedPlayer) {
+        selectedPlayer.classList.remove('selected');
+    }
+
+    selectedPlayer = e.target;
+    selectedPlayer.classList.add('selected'); // Highlight the selected player
 }
 
-function handleDragOver(e) {
-    e.preventDefault();
-}
-
-function handleDragLeave(e) {
-    e.target.classList.remove('dragover');
-}
-
-function handleDrop(e) {
-    e.preventDefault();
-    const playerId = e.dataTransfer.getData('text/plain');
-    const playerElement = document.getElementById(playerId);
-    if (playerElement && e.target.classList.contains('drop-zone') && !e.target.hasChildNodes()) {
-        const clone = playerElement.cloneNode(true);
-        clone.setAttribute('draggable', false); 
-        e.target.appendChild(clone);
-        playerElement.style.display = 'none';
+function placePlayer(e) {
+    if (selectedPlayer && !e.currentTarget.hasChildNodes()) {
+        // Move selected player to the clicked position
+        e.currentTarget.textContent = selectedPlayer.textContent;
+        selectedPlayer.style.display = 'none'; // Hide the player from the list
+        selectedPlayer.classList.remove('selected');
+        selectedPlayer = null; // Deselect player
     }
 }
 
-function returnPlayerToList(playerId) {
-    const playerElement = document.getElementById(playerId);
-    if (playerElement) {
-        playerElement.style.display = ''; 
-    }
-}
+// Optional: Add styles for .selected in your CSS to highlight the selected player
