@@ -1,4 +1,4 @@
-const playerNames = ["أحمد", "منذر", "كوريا", "تركي", "ملي", "احمدي", "محمد", "بيما", "زياد", "هياف", "بالبيد", "منشي" ,"رجب", "باخ", "براء", "باشماخ", "عبديه", "سعود", "ولي", "غسان"];
+const playerNames = ["أحمد", "منذر", "كوريا", "تركي", "ملي", "احمدي", "محمد", "بيما", "زياد", "هياف", "بالبيد", "منشي", "رجب", "باخ", "براء", "باشماخ", "عبديه", "سعود", "ولي", "غسان"];
 const playersDiv = document.getElementById('players');
 let selectedPlayer = null;
 
@@ -19,18 +19,17 @@ function selectPlayer(e) {
     if (selectedPlayer) {
         selectedPlayer.classList.remove('selected');
     }
-
     selectedPlayer = e.target;
-    selectedPlayer.classList.add('selected'); 
+    selectedPlayer.classList.add('selected');
 }
 
 function placePlayer(e) {
-    if (selectedPlayer && !e.currentTarget.hasChildNodes()) {
-        // Move selected player to the clicked position
-        e.currentTarget.textContent = selectedPlayer.textContent;
-        selectedPlayer.style.display = 'none'; // Hide the player from the list
+    const targetZone = e.currentTarget;
+
+    if (selectedPlayer && !targetZone.hasChildNodes()) {
+        targetZone.appendChild(selectedPlayer);
         selectedPlayer.classList.remove('selected');
-        selectedPlayer = null; // Deselect player
+        selectedPlayer.classList.add('placed');
+        selectedPlayer = null;
     }
 }
-
