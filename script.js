@@ -16,11 +16,35 @@ dropZones.forEach(zone => {
 });
 
 function selectPlayer(e) {
+    const targetPlayer = e.target;
+
     if (selectedPlayer) {
-        selectedPlayer.classList.remove('selected');
+        if (selectedPlayer === targetPlayer) {
+            selectedPlayer.classList.remove('selected');
+            selectedPlayer = null;
+        } else {
+            const targetParent = targetPlayer.parentNode;
+            const selectedParent = selectedPlayer.parentNode;
+            
+            if (selectedPlayer.classList.contains('placed') && !targetPlayer.classList.contains('placed')) {
+                selectedPlayer.classList.remove('placed');
+                targetPlayer.classList.add('placed');
+            }
+            else if (!selectedPlayer.classList.contains('placed') && targetPlayer.classList.contains('placed')) {
+                selectedPlayer.classList.add('placed');
+                targetPlayer.classList.remove('placed');
+            }
+
+            targetParent.insertBefore(selectedPlayer, targetPlayer);
+            selectedParent.appendChild(targetPlayer,selectedPlayer);
+            
+            selectedPlayer.classList.remove('selected');
+            selectedPlayer = null;
+        }
+    } else {
+        selectedPlayer = targetPlayer;
+        selectedPlayer.classList.add('selected');
     }
-    selectedPlayer = e.target;
-    selectedPlayer.classList.add('selected');
 }
 
 function placePlayer(e) {
