@@ -35,8 +35,8 @@ function selectPlayer(e) {
                 targetPlayer.classList.remove('placed');
             }
 
-            targetParent.insertBefore(selectedPlayer, targetPlayer);
-            selectedParent.appendChild(targetPlayer,selectedPlayer);
+            targetParent.appendChild(selectedPlayer);
+            selectedParent.appendChild(targetPlayer);
             
             selectedPlayer.classList.remove('selected');
             selectedPlayer = null;
